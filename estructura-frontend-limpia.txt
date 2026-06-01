@@ -1,0 +1,73 @@
+﻿FrontendBaber-Copia
+├── public
+│   ├── favicon.svg
+│   └── icons.svg
+├── src
+│   ├── api
+│   │   └── axiosConfig.js
+│   ├── assets
+│   │   ├── barber.png
+│   │   ├── hero.png
+│   │   ├── react.svg
+│   │   └── vite.svg
+│   ├── auth
+│   │   ├── authContext.jsx
+│   │   └── PrivateRoute.jsx
+│   ├── pages
+│   │   ├── admin
+│   │   │   ├── adminlayout.jsx
+│   │   │   ├── asistencia.jsx
+│   │   │   ├── barberos.jsx
+│   │   │   ├── bitacora.jsx
+│   │   │   ├── citas.jsx
+│   │   │   ├── cliente.jsx
+│   │   │   ├── dashboard.jsx
+│   │   │   ├── horarios.jsx
+│   │   │   ├── perfil.jsx
+│   │   │   ├── Proximamente.jsx
+│   │   │   ├── roles.jsx
+│   │   │   ├── servicios.jsx
+│   │   │   └── usuarios.jsx
+│   │   ├── cliente
+│   │   │   ├── ClienteCitas.jsx
+│   │   │   ├── ClienteDashboard.jsx
+│   │   │   ├── ClienteHistorial.jsx
+│   │   │   ├── ClienteLayout.jsx
+│   │   │   ├── ClientePerfil.jsx
+│   │   │   ├── ClientePromociones.jsx
+│   │   │   ├── ClienteReservar.jsx
+│   │   │   ├── ClienteSoporte.jsx
+│   │   │   └── clienteUtils.js
+│   │   └── landing.jsx
+│   ├── styles
+│   │   ├── admin.css
+│   │   ├── asistencia.css
+│   │   ├── auth.css
+│   │   ├── barberos.css
+│   │   ├── bitacora.css
+│   │   ├── citas.css
+│   │   ├── cliente.css
+│   │   ├── clientePortal.css
+│   │   ├── components.css
+│   │   ├── dashboard.css
+│   │   ├── global.css
+│   │   ├── horarios.css
+│   │   ├── landing.css
+│   │   ├── perfil.css
+│   │   ├── roles.css
+│   │   ├── servicios.css
+│   │   └── usuarios.css
+│   ├── utils
+│   │   └── apiError.js
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── .env.example
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package.json
+├── README.md
+├── vercel.json
+└── vite.config.js

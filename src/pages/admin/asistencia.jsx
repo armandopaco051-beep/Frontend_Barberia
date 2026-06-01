@@ -15,7 +15,7 @@ const EMPTY = {
   estado: 'Presente',
   hora_entrada: '',
   hora_salida: '',
-  observacion: '',
+  comentario: '',
 };
 
 function Toast({ msg, type, onClose }) {
@@ -71,8 +71,8 @@ function horaSalida(asistencia) {
   return asistencia?.hora_salida || asistencia?.salida || '-';
 }
 
-function observacion(asistencia) {
-  return asistencia?.observacion || asistencia?.observaciones || asistencia?.descripcion || '-';
+function comentario(asistencia) {
+  return asistencia?.comentario || '-';
 }
 
 function estadoClase(estado) {
@@ -90,7 +90,7 @@ function nombreBarbero(barbero) {
 
 // CU9: Gestionar asistencia.
 // Lista barberos, muestra su asistencia por fecha y permite registrar estado,
-// hora de entrada/salida y observacion. Esto afecta la disponibilidad de citas.
+// hora de entrada/salida y comentario. Esto afecta la disponibilidad de citas.
 export default function Asistencia() {
   const [barberos, setBarberos] = useState([]);
   const [asistencias, setAsistencias] = useState([]);
@@ -160,16 +160,16 @@ export default function Asistencia() {
   const abrirRegistro = (barbero, asistencia = null) => {
     if (asistencia) {
       setEditId(asistenciaId(asistencia));
-      setForm({
-        codigo_barbero: codigoBarbero(asistencia) || barbero.codigo,
-        fecha: fechaAsistencia(asistencia) || fecha,
-        estado: estadoAsistencia(asistencia),
-        hora_entrada: asistencia.hora_entrada || asistencia.entrada || '',
-        hora_salida: asistencia.hora_salida || asistencia.salida || '',
-        observacion: asistencia.observacion || asistencia.observaciones || asistencia.descripcion || '',
-      });
-      setModal('editar');
-      return;
+        setForm({
+          codigo_barbero: codigoBarbero(asistencia) || barbero.codigo,
+          fecha: fechaAsistencia(asistencia) || fecha,
+          estado: estadoAsistencia(asistencia),
+          hora_entrada: asistencia.hora_entrada || asistencia.entrada || '',
+          hora_salida: asistencia.hora_salida || asistencia.salida || '',
+          comentario: asistencia.comentario || '',
+        });
+        setModal('editar');
+        return;
     }
 
     setEditId(null);
@@ -191,7 +191,7 @@ export default function Asistencia() {
       estado: form.estado,
       hora_entrada: form.hora_entrada || null,
       hora_salida: form.hora_salida || null,
-      observacion: form.observacion || '',
+      comentario: form.comentario || '',
     };
 
     try {
@@ -271,7 +271,7 @@ export default function Asistencia() {
 
         <table className="tabla">
           <thead>
-            <tr><th>Barbero</th><th>Especialidad</th><th>Estado</th><th>Entrada</th><th>Salida</th><th>Observacion</th><th>Acciones</th></tr>
+            <tr><th>Barbero</th><th>Especialidad</th><th>Estado</th><th>Entrada</th><th>Salida</th><th>Comentario</th><th>Acciones</th></tr>
           </thead>
           <tbody>
             {filas.length === 0 ? (
@@ -286,7 +286,7 @@ export default function Asistencia() {
                 <td><span className={`badge ${estadoClase(estadoAsistencia(asistencia))}`}>{estadoAsistencia(asistencia)}</span></td>
                 <td>{horaEntrada(asistencia)}</td>
                 <td>{horaSalida(asistencia)}</td>
-                <td className="asistencia-muted">{observacion(asistencia)}</td>
+                <td className="asistencia-muted">{comentario(asistencia)}</td>
                 <td className="asistencia-actions">
                   <button className="btn-outline" onClick={() => abrirRegistro(barbero, asistencia)}>
                     {asistencia ? 'Editar' : 'Registrar'}
@@ -305,7 +305,7 @@ export default function Asistencia() {
         <div className="modal-overlay" onClick={cerrar}>
           <div className="modal-box" onClick={e => e.stopPropagation()}>
             <h3>{modal === 'crear' ? 'Registrar asistencia' : 'Editar asistencia'}</h3>
-            <p>Selecciona estado, horas y observacion si corresponde.</p>
+            <p>Selecciona estado, horas y comentario si corresponde.</p>
 
             <div className="form-row">
               <div className="form-group">
@@ -340,8 +340,8 @@ export default function Asistencia() {
             </div>
 
             <div className="form-group">
-              <label>Observacion</label>
-              <textarea className="input-field asistencia-textarea" placeholder="Ej: Llego 15 minutos tarde..." value={form.observacion} onChange={e => setForm({ ...form, observacion: e.target.value })} />
+              <label>Comentario</label>
+              <textarea className="input-field asistencia-textarea" placeholder="" value={form.comentario} onChange={e => setForm({ ...form, comentario: e.target.value })} />
             </div>
 
             <div className="asistencia-modal-actions">

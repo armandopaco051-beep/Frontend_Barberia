@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/authContext';
 import api from '../api/axiosConfig';
+import { formatApiError } from '../utils/apiError';
 
 const PASSWORD_ENDPOINTS = {
   solicitar: 'seguridad/password/solicitar-codigo/',
@@ -28,21 +29,6 @@ const FEATURES = [
   'Notificaciones para cambios o reprogramaciones',
   'Panel administrativo para controlar la operacion',
 ];
-
-// Normaliza errores de login, registro y recuperacion para mostrarlos al usuario.
-function formatApiError(data, fallback = 'Ocurrio un error. Intenta nuevamente.') {
-  if (!data) return fallback;
-  if (typeof data === 'string') return data;
-  if (data.error) return data.error;
-  if (data.detail) return data.detail;
-  if (data.message) return data.message;
-
-  const message = Object.entries(data)
-    .map(([field, value]) => `${field}: ${Array.isArray(value) ? value.join(', ') : value}`)
-    .join(' | ');
-
-  return message || fallback;
-}
 
 // Landing publica.
 // Contiene tres flujos: iniciar sesion, registrar cliente publico y recuperar contrasena.

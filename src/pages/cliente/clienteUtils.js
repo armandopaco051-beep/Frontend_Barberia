@@ -1,3 +1,5 @@
+export { formatApiError } from '../../utils/apiError';
+
 export function normalizarLista(data, keys = []) {
   if (Array.isArray(data)) return data;
   if (Array.isArray(data?.results)) return data.results;
@@ -5,18 +7,6 @@ export function normalizarLista(data, keys = []) {
     if (Array.isArray(data?.[key])) return data[key];
   }
   return [];
-}
-
-export function formatApiError(data, fallback = 'Ocurrio un error.') {
-  if (!data) return fallback;
-  if (typeof data === 'string') return data;
-  if (data.error) return data.error;
-  if (data.detail) return data.detail;
-  if (data.mensaje) return data.mensaje;
-
-  return Object.entries(data)
-    .map(([field, value]) => `${field}: ${Array.isArray(value) ? value.join(', ') : value}`)
-    .join(' | ') || fallback;
 }
 
 export function nombrePersona(item) {
