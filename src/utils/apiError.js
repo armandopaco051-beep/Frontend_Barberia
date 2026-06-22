@@ -2,7 +2,16 @@ function collectMessages(value) {
   if (value === null || value === undefined) return [];
 
   if (typeof value === 'string') {
-    return value.trim() ? [value.trim()] : [];
+    const message = value.trim();
+    if (!message) return [];
+
+    // Algunos 404 del backend llegan como una pagina HTML completa.
+    // Evitamos mostrar ese HTML crudo dentro del toast del frontend.
+    if (/^<!doctype html/i.test(message) || /^<html/i.test(message)) {
+      return ['Endpoint no encontrado en el backend. Verifica la ruta configurada.'];
+    }
+
+    return [message];
   }
 
   if (typeof value === 'number' || typeof value === 'boolean') {
